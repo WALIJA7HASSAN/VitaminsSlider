@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.vitamin-section {
+    background: #E6F5FF;
+    color: #3b79b8;
+    overflow: hidden; /* Prevent content overflow */
+    padding-bottom: 60px;
+}
+
+.vitamin-header {
+    padding: 60px 30px;
+    text-align: center;
+    position: relative;
+     
+}
+
+.vitamin-header h3 {
+    font-size: 24px;
+}
+
+.vitamin-header p {
+    font-size: 18px;
+    margin-top: 15px;
+    letter-spacing: 4px;
+}
+
+.vitamin-cards {
+     position: relative;
+    display: flex; /* Use flexbox for horizontal scrolling */
+    gap: 1rem;
+    overflow: hidden; /* Hide the scrollbar */
+    user-select: none;
+    cursor: grab;
+    width: 100%;
+    padding: 10px;
+   
+}
+
+.vitamin-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    cursor: pointer;
+    flex: 0 0 auto; /* Prevent cards from shrinking */
+    width: 100%;
+    z-index: 500;
+}
+
+.vitamin-card-header {
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    gap: 1rem;
+}
+
+.vitamin-card-header img {
+    width: 66px;
+    object-fit: cover;
+}
+
+.vitamin-card-content {
+    padding-block: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.vitamin-card-content h4 {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.vitamin-card-content p {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.vitamin-cards::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.vitamin-cards {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    
+  
+  
+}
+
+.vitamin-card {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    transition: transform 0.3s;
+}
+
+.vitamin-card.active {
+    /* transform: scale(1.1);
+    border: 2px solid #000; */
+      position: relative;
+}
+.vitamin-icons{
+color: white;
+position: absolute;
+top: 200%;
+width: 100%;
+left: 0;
+
+font-size: 24px;
+ opacity: 1;
+z-index: 100000;
+
+}
+.vitamin-icons div{
+    display: flex;
+justify-content: space-between;
+}
+.vitamin-icons .bx{
+background-color: #3b79b8;
+border-radius: 50%;
+padding: 0.5rem;
+cursor: pointer;
+}
+.cards-progress-bar{
+    margin: 2rem auto 0 auto;
+    height: 5px;
+    width: 95%;
+    background-color: #3b79b840;
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: repeat(16,6.25%);
+   
+}
+.cards-progress-bar span{
+    height: 100%;
+    cursor: pointer;
+}
+
+.cards-progress-bar span.active,
+.cards-progress-bar span.filled {
+    background-color: #3b79b8;
+}
+@media screen and (min-width: 768px) {
+    .vitamin-card-header {
+        font-size: 32px;
+    }
+    .vitamin-card-header img {
+        width: 80px;
+    }
+    .vitamin-card-content div {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .vitamin-card-content h4 {
+        font-size: 18px;
+    }
+    .vitamin-card-content p {
+        font-size: 16px;
+        flex-grow: 1;
+        max-width: 90%;
+    }
+    .vitamin-card{
+        width: 50%;
+        flex: 0 0 50%;
+        scroll-snap-align: start;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .vitamin-header h3 {
+        font-size: 42px;
+    }
+    .vitamin-header p {
+        font-size: 20px;
+    }
+    .vitamin-card-content p {
+        max-width: 70%;
+    }
+     .vitamin-card{
+        width: 32%;
+         flex: 0 0 32%;
+         scroll-snap-align: center;
+    }
+    .vitamin-icons{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        
+    }
+    .vitamin-icons div{
+        width: 35%;
+
+       
+    }
+}
