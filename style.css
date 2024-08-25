@@ -20,7 +20,7 @@ html {
 }
 
 .vitamin-header {
-    padding: 60px 30px;
+    padding: 60px 30px 5px 30px;
     text-align: center;
     position: relative;
      
@@ -39,19 +39,19 @@ html {
 .vitamin-cards {
      position: relative;
     display: flex; /* Use flexbox for horizontal scrolling */
-    gap: 1rem;
+    gap: 2rem;
     overflow: hidden; /* Hide the scrollbar */
     user-select: none;
     cursor: grab;
     width: 100%;
-    padding: 10px;
+    padding: 10px 30px;
    
 }
 
 .vitamin-card {
     background: white;
     border-radius: 15px;
-    padding: 30px;
+    padding: 10px;
     cursor: pointer;
     flex: 0 0 auto; /* Prevent cards from shrinking */
     width: 100%;
@@ -80,6 +80,7 @@ html {
 .vitamin-card-content h4 {
     font-size: 16px;
     letter-spacing: 1px;
+    word-break: break-all;
 }
 
 .vitamin-card-content p {
@@ -137,7 +138,7 @@ cursor: pointer;
 .cards-progress-bar{
     margin: 2rem auto 0 auto;
     height: 5px;
-    width: 95%;
+    width: 70%;
     background-color: #3b79b840;
     max-width: 1024px;
     display: grid;
@@ -153,6 +154,14 @@ cursor: pointer;
 .cards-progress-bar span.filled {
     background-color: #3b79b8;
 }
+.cards-progress-bar span:first-of-type{
+    background-color: #3b79b8;
+}
+@media screen and (min-width: 420px) {
+    .vitamin-card{
+        padding: 30px;
+    }
+}
 @media screen and (min-width: 768px) {
     .vitamin-card-header {
         font-size: 32px;
@@ -167,6 +176,7 @@ cursor: pointer;
     }
     .vitamin-card-content h4 {
         font-size: 18px;
+       
     }
     .vitamin-card-content p {
         font-size: 16px;
@@ -178,6 +188,12 @@ cursor: pointer;
         flex: 0 0 50%;
         scroll-snap-align: start;
     }
+    .cards-progress-bar{
+     width: 95%;
+    }
+    .vitamin-cards{
+        gap: 1.7rem;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -188,7 +204,7 @@ cursor: pointer;
         font-size: 20px;
     }
     .vitamin-card-content p {
-        max-width: 70%;
+        max-width: 65%;
     }
      .vitamin-card{
         width: 32%;
@@ -206,4 +222,5 @@ cursor: pointer;
 
        
     }
+    
 }
