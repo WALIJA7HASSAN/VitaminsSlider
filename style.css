@@ -167,6 +167,10 @@ cursor: pointer;
     }
 }
 @media screen and (min-width: 768px) {
+   
+    .vitamin-icons{
+         top: 250%;
+    }
     .vitamin-card-header {
         font-size: 32px;
     }
@@ -198,6 +202,9 @@ cursor: pointer;
     .vitamin-cards{
         gap: 1.7rem;
     }
+     .vitamin-card-content p {
+        max-width: 65%;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -220,6 +227,7 @@ cursor: pointer;
         justify-content: center;
         width: 100%;
         top: 230%;
+       
       
         
     }
