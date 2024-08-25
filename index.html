@@ -27,10 +27,10 @@
                </div>
             </div>
         </div>
-        <div class="vitamin-cards">
+        <div class="vitamin-cards carousel">
            
             <!-- single card -->
-            <div id="card-1" class="vitamin-card vitamin-card-first ">
+            <div id="card-1" class="vitamin-card vitamin-card-first active ">
                 <div class="vitamin-card-header">
                     <img src="./assets/Vitamin_A.png" alt="">
                     <h3>Vitamin A</h3>
@@ -433,7 +433,9 @@
 
 
         </div>
-        <div class="cards-progress-bar">
+        <div class="progress-bar-container">
+            <!-- <div class="progress-bar"></div> -->
+           
           
     <span id="progress-0"></span>
     <span id="progress-1"></span>
@@ -456,16 +458,16 @@
   
 
 
-     <script>
-document.addEventListener('DOMContentLoaded', () => {
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.querySelector('.vitamin-cards');
-    const progressBar = document.querySelector('.cards-progress-bar');
+    const progressBar = document.querySelector('.progress-bar-container');
     const progressSpans = progressBar.querySelectorAll('span');
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    // Clone items for infinite scrolling effect
+    // Function to clone cards for infinite scrolling
     const cloneCards = () => {
         const cards = document.querySelectorAll('.vitamin-card');
         cards.forEach(card => {
@@ -473,9 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
             carousel.appendChild(clone);
         });
     };
-    cloneCards();
 
-    // Set initial scroll position and active card
+    // Set initial scroll position to show the first card
     const setInitialScroll = () => {
         const firstCard = document.querySelector('.vitamin-card');
         const totalCards = document.querySelectorAll('.vitamin-card').length;
@@ -484,8 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardWidth = firstCard.offsetWidth;
             const carouselWidth = carousel.clientWidth;
 
-            // Calculate the initial scroll position
-            carousel.scrollLeft = (totalCards * cardWidth) / 2 - carouselWidth / 2;
+            // Calculate the initial scroll position to center the first card
+            carousel.scrollLeft = 0;
 
             // Set the first card as active
             firstCard.classList.add('active');
@@ -549,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     correspondingCard.classList.add('active');
                     updateProgressBar(correspondingCard);
-                }, 600);  // Consider tweaking this timing if needed
+                }, 600);
             });
         });
     };
@@ -560,10 +561,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const halfScrollWidth = carousel.scrollWidth / 2;
 
         if (carousel.scrollLeft >= maxScrollLeft - 1) {
-            // Jump to the start to create infinite scroll illusion
             carousel.scrollLeft = carousel.scrollLeft - halfScrollWidth;
         } else if (carousel.scrollLeft <= 0) {
-            // Jump to the end to create infinite scroll illusion
             carousel.scrollLeft = carousel.scrollLeft + halfScrollWidth;
         }
     };
@@ -574,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         e.preventDefault();
         const x = e.pageX || e.touches[0].pageX;
-        const walk = (x - startX) * 1; // Adjust speed for smoother dragging
+        const walk = (x - startX) * 2; // Increase the multiplier for more sensitivity
         carousel.scrollLeft = scrollLeft - walk;
 
         // Update the active card immediately during dragging
@@ -583,7 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize carousel behavior
     const initializeCarousel = () => {
-        setInitialScroll();
+        setInitialScroll(); // Set initial scroll position first
+        cloneCards(); // Then clone the cards for infinite scrolling
 
         // Mouse events
         carousel.addEventListener('mousedown', (e) => {
@@ -625,8 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Infinite Scroll Logic
         carousel.addEventListener('scroll', () => {
             handleInfiniteScroll();
-
-            // Remove debounce logic during drag
             updateActiveCard();
         });
 
@@ -647,8 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Update after smooth scrolling
-            setTimeout(updateActiveCard, 600);  // Consider tweaking this timing if needed
+            setTimeout(updateActiveCard, 600);
         };
 
         // Add event listeners to navigation icons
@@ -661,47 +658,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to smooth scroll to the closest card after dragging ends
     const smoothScrollToClosestCard = () => {
-        const carouselCenter = carousel.scrollLeft + carousel.clientWidth / 2;
-        let closestCard = null;
-        let closestDistance = Infinity;
-
-        document.querySelectorAll('.vitamin-card').forEach((card) => {
-            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-            const distance = Math.abs(carouselCenter - cardCenter);
-
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestCard = card;
-            }
-        });
-
+        const closestCard = document.querySelector('.vitamin-card.active');
         if (closestCard) {
+            const cardWidth = closestCard.offsetWidth;
+            const scrollAmount = closestCard.offsetLeft - (carousel.clientWidth - cardWidth) / 2;
+
             carousel.scrollTo({
-                left: closestCard.offsetLeft - (carousel.clientWidth - closestCard.offsetWidth) / 2,
+                left: scrollAmount,
                 behavior: 'smooth'
             });
 
-            // Update the active card after smooth scrolling
+            // Update progress bar
             setTimeout(() => {
                 updateActiveCard();
-            }, 200);  // Consider tweaking this timing if needed
+            }, 600);
         }
     };
 
     // Initialize the components
     initializeCarousel();
     handleProgressBarClick();
-
-    // Initialize the first card and progress bar
-    const firstCard = document.querySelector('.vitamin-card');
-    if (firstCard) {
-        firstCard.classList.add('active');
-        updateProgressBar(firstCard);
-    }
 });
-</script> 
 
-
+ </script>
 
 
 

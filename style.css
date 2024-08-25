@@ -113,9 +113,10 @@ html {
 }
 
 .vitamin-card.active {
-    /* transform: scale(1.1);
-    border: 2px solid #000; */
+     /* transform: scale(1.1); */
+   
       position: relative;
+
 }
 .vitamin-icons{
 color: white;
@@ -139,7 +140,7 @@ border-radius: 50%;
 padding: 0.5rem;
 cursor: pointer;
 }
-.cards-progress-bar{
+.progress-bar-container{
     margin: 2rem auto 0 auto;
     height: 5px;
     width: 70%;
@@ -149,16 +150,22 @@ cursor: pointer;
     grid-template-columns: repeat(16,6.25%);
    
 }
-.cards-progress-bar span{
+.progress-bar-container span{
     height: 100%;
     cursor: pointer;
 }
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #3f7ab9;
+    transition: width 0.3s ease;
+}
 
-.cards-progress-bar span.active,
-.cards-progress-bar span.filled {
+.progress-bar-container span.active,
+.progress-bar-container span.filled {
     background-color: #3b79b8;
 }
-.cards-progress-bar span:first-of-type{
+.progress-bar-container span:first-of-type{
     background-color: #3b79b8;
 }
 @media screen and (min-width: 420px) {
@@ -196,11 +203,12 @@ cursor: pointer;
         flex: 0 0 50%;
         scroll-snap-align: start;
     }
-    .cards-progress-bar{
+    .progress-bar-container{
      width: 95%;
     }
     .vitamin-cards{
         gap: 1.7rem;
+         margin: 0 12px;
     }
      .vitamin-card-content p {
         max-width: 65%;
@@ -208,6 +216,9 @@ cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {
+    .vitamin-cards{
+         margin: 0 auto;
+    }
     .vitamin-header h3 {
         font-size: 42px;
     }
