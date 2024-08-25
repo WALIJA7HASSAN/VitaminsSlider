@@ -30,7 +30,7 @@
         <div class="vitamin-cards">
            
             <!-- single card -->
-            <div id="card-1" class="vitamin-card vitamin-card-first">
+            <div id="card-1" class="vitamin-card vitamin-card-first ">
                 <div class="vitamin-card-header">
                     <img src="./assets/Vitamin_A.png" alt="">
                     <h3>Vitamin A</h3>
@@ -454,10 +454,9 @@
         </div>
     </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.querySelector('.vitamin-cards');
-    const cards = document.querySelectorAll('.vitamin-card');
     const progressBar = document.querySelector('.cards-progress-bar');
     const progressSpans = progressBar.querySelectorAll('span');
     let isDown = false;
@@ -466,6 +465,7 @@
 
     // Clone items for infinite scrolling effect
     const cloneCards = () => {
+        const cards = document.querySelectorAll('.vitamin-card');
         cards.forEach(card => {
             let clone = card.cloneNode(true);
             carousel.appendChild(clone);
@@ -574,6 +574,9 @@
         const x = e.pageX || e.touches[0].pageX;
         const walk = (x - startX) * 1; // Adjust speed for smoother dragging
         carousel.scrollLeft = scrollLeft - walk;
+
+        // Update the active card immediately during dragging
+        updateActiveCard();
     };
 
     // Initialize carousel behavior
@@ -621,9 +624,8 @@
         carousel.addEventListener('scroll', () => {
             handleInfiniteScroll();
 
-            // Debounce scroll event handling
-            clearTimeout(carousel.debounce);
-            carousel.debounce = setTimeout(updateActiveCard, 100);  // Adjust debounce timing as needed
+            // Remove debounce logic during drag
+            updateActiveCard();
         });
 
         // Navigation logic
@@ -680,7 +682,7 @@
             // Update the active card after smooth scrolling
             setTimeout(() => {
                 updateActiveCard();
-            }, 600);  // Consider tweaking this timing if needed
+            }, 200);  // Consider tweaking this timing if needed
         }
     };
 
@@ -695,9 +697,7 @@
         updateProgressBar(firstCard);
     }
 });
-
-  </script>
-
+</script>
 
 
 
